@@ -8,7 +8,7 @@ This project is a chatbot application built using **Spring Boot**, **React**, **
 - Frontend built with React.
 - Backend built with Spring Boot.
 - PostgreSQL for database management.
-- Dockerized for seamless setup and deployment.
+- Dockerized setup and deployment.
 
 ## Project Structure
 ```plaintext

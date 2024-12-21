@@ -31,3 +31,30 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Maven ###
+/.mvn/
+/mvnw
+/mvnw.cmd
+
+### IDEs ###
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+### macOS ###
+.DS_Store
+
+### Windows ###
+Thumbs.db
+

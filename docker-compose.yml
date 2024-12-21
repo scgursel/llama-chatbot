@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  backend:
+    image: llama2-1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/llamadb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: llamadb
+    ports:
+      - "5432:5432"
+#  frontend:
+#    build:
+#      context: ./path-to-your-react-app
+#      dockerfile: Dockerfile
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - backend

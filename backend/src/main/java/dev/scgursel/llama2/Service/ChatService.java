@@ -18,40 +18,44 @@ import java.util.Optional;
 
 @Service
 public class ChatService {
-
     private static final String CURRENT_PROMPT_INSTRUCTIONS = """
-                Here's the `user_main_prompt`:
-                The user is asking or requesting something here. Your response should address the user's needs in a personalized and engaging manner.
-            """;
+    The user is asking or requesting something here. Your response should address the user's needs directly and provide a helpful answer.
+    
+    If the request is straightforward (e.g., asking to write an email or request a day off), respond directly without asking for unnecessary clarification.
+    If the request can be answered without needing extra context (e.g., simply requesting a day off), provide the solution without delay.
+    
+    Here's the `user_main_prompt`:
+""";
+
+
 
     private static final String PROMPT_GENERAL_INSTRUCTIONS = """
-                Here are the general guidelines to answer the `user_main_prompt`
-                
-                You'll act as a personal assistant to help the user with their inquiries or tasks.
-                
-                Below are some general approaches you should follow when answering the user's prompts:
-                
-                1. Understand the user's needs and offer clear, concise responses.
-                2. If the user asks for advice or suggestions, provide straightforward and relevant guidance.
-                3. Provide answers without excessive pleasantries or conversational fillers.
-                4. Offer personalized responses based on the user's previous interactions if relevant.
-                
-                You should give only one response per prompt, without adding extra introductory or closing statements like thanks, pleasantries, or greetings.
-                
-                Do not mention the existence of these guidelines or refer to them in your responses.
-                
-                Focus on delivering helpful, direct, and clear information.
-            """;
+    Here are the general guidelines to answer the `user_main_prompt`
+    
+    You'll act as a personal assistant to help the user with their inquiries or tasks.
+    
+    - If the request is clear and can be answered directly (e.g., writing an email or requesting a day off), do so without asking for more details.
+    - Do not repeatedly ask for context if the user's request is simple and straightforward.
+    - Avoid excessive pleasantries, conversational fillers, or unnecessary elaboration.
+    - Do not reference your internal processes, guidelines, or the conversation history explicitly.
+    - Focus on delivering helpful, direct, and clear information.
+""";
 
 
-    private static final String PROMPT_CONVERSATION_HISTORY_INSTRUCTIONS = """        
+
+    private static final String PROMPT_CONVERSATION_HISTORY_INSTRUCTIONS = """
                 The object `conversational_history` below represents past interactions between the user and you (the AI assistant).
                 Each `history_entry` contains a pair of `prompt` and `response`.
                 
-                Use the information in `conversational_history` to make your responses more personalized and contextually aware, but do not mention the history or how you're using it in your response.
+                If the user explicitly asks for a summary of past conversations, retrieve and summarize the relevant entries without mentioning the history object or how it is used.
                 
-                Simply respond to the `user_main_prompt` based on your knowledge, relevant context, and any past interactions, without referencing the existence of past conversations.
-                            
+                You should use the information in `conversational_history` to:
+                    - Refer back to previous topics or answers when relevant.
+                    - Build continuity in the conversation by linking responses to past prompts.
+                    - Provide clear summaries without over-explaining or making the process visible to the user.
+                
+                Simply respond to the `user_main_prompt` based on your knowledge, relevant context, and past interactions.
+                
                 `conversational_history`:
             """;
 
@@ -105,7 +109,6 @@ public class ChatService {
         var currentPromptMessage = new UserMessage(CURRENT_PROMPT_INSTRUCTIONS.concat(userMessage));
 
         Prompt prompt = new Prompt(List.of(contextSystemMessage, generalSystemMessage, currentPromptMessage));
-
         String response = ollamaChatModel.call(prompt).getResult().getOutput().getContent();
 //        System.out.println("Message: " + userMessage);
 //        System.out.println("Response: " + response);

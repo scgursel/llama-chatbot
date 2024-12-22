@@ -4,12 +4,14 @@ services:
     image: llama2-1
     ports:
       - "8080:8080"
+      - "11434:11434"
     depends_on:
       - database
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/llamadb
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=admin
+
   database:
     image: postgres
     restart: always
@@ -19,6 +21,17 @@ services:
       POSTGRES_DB: llamadb
     ports:
       - "5432:5432"
+#  ollama:
+#    image: ollama/ollama
+#    ports:
+#      - 11434:11434
+#    volumes:
+#      - ./ollama/ollama:/root/.ollama
+#    container_name: ollama
+#    pull_policy: always
+#    tty: true
+#    restart: always
+
 #  frontend:
 #    build:
 #      context: ./path-to-your-react-app

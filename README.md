@@ -5,6 +5,8 @@ This project is a chatbot application built using **Spring Boot**, **React**, **
 
 ## Features
 - Chat functionality powered by the Llama model.
+- Have conversation logic, remembers past conversations
+- You can view past conversations, continue and delete.
 - Frontend built with React.
 - Backend built with Spring Boot.
 - PostgreSQL for database management.
@@ -35,7 +37,7 @@ Before setting up the project, make sure you have the following installed on you
 
 
 # Setup Instructions
-## 1.Running the Llama2:7B Model Locally
+## 1.Running the Llama Model Locally
 
 ### 1. Install Ollama
 To run the Llama2:7B model locally, you'll need to use Ollama. You can get started by installing the Ollama CLI.
@@ -70,11 +72,18 @@ cd llama-chatbot
 ```
 
 ## 3. Build and Run the Application
-Build and run the application using Docker Compose:
+### Option 1: Using Docker Compose
+
+  Build and run the application using Docker Compose:
 ```bash
 docker-compose up --build
 ```
+### Option 2: Running the .jar File Directly
+* If you prefer not to use Docker, you can run the application directly by executing the .jar file:
 
+```bash
+java -jar llama2-1.jar
+```
 ## 4. Access the Application
 
 * Frontend: http://localhost
@@ -83,13 +92,19 @@ docker-compose up --build
 
 ## API Endpoints
 
-* /chat: Endpoint for sending and receiving chatbot messages.
-* /history/{conversationId}: Retrieve chat history for a conversation.
+* `POST /chat`: Endpoint for sending and receiving chatbot messages.
+* `GET /conversations` Retrieves a list of all conversations.
+* `GET /history/{conversationId}`:  Retrieve chat history for a conversation.
+* `DELETE /history/{conversationId}`: Deletes a conversation and its associated history by conversationId.
+
 ## Environment Variables
 
-* spring.datasource.username: Database connection URL.
-* spring.datasource.password: Database username.
-* spring.datasource.url: Database password.
-* spring.ai.ollama.chat.model: Llama model 
+### Database connection details
+* spring.datasource.url=jdbc:postgresql://database:5432/llamadb  # Database connection URL.
+* spring.datasource.username=postgres                            # Database username.
+* spring.datasource.password=admin                               # Database password.
 
+### AI service configuration
+* spring.ai.ollama.chat.model=Llama model                        # The name of the Llama model to be used for chat.
+* spring.ai.ollama.base-url=http://host.docker.internal:11434    # Base URL for the Ollama AI service (required only when running in Docker). You can skip this if running locally.
 

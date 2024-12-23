@@ -13,12 +13,12 @@ This project is a chatbot application built using **Spring Boot**, **React**, **
 - Dockerized setup and deployment.
 
 ## Demonstration
+[Video](https://www.youtube.com/watch?v=NZz0bjvUbBQ)
 ![Screenshot 2024-12-23 at 02 49 41](https://github.com/user-attachments/assets/c30e290e-a01d-4e01-bf30-bb0c1e1f0e7d)
 ![Screenshot 2024-12-23 at 02 52 06](https://github.com/user-attachments/assets/f22a170c-c537-4201-abea-f452a7faf654)
 
 
-## Project Struct
-ure
+## Project Structure
 ```plaintext
 .
 ├── backend/            # Spring Boot application

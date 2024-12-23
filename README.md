@@ -7,12 +7,18 @@ This project is a chatbot application built using **Spring Boot**, **React**, **
 - Chat functionality powered by the Llama model.
 - Have conversation logic, remembers past conversations
 - You can view past conversations, continue and delete.
-- Frontend built with React.
+- Frontend built with React. Have light and dark mode 
 - Backend built with Spring Boot.
 - PostgreSQL for database management.
 - Dockerized setup and deployment.
 
-## Project Structure
+## Demonstration
+![Screenshot 2024-12-23 at 02 49 41](https://github.com/user-attachments/assets/c30e290e-a01d-4e01-bf30-bb0c1e1f0e7d)
+![Screenshot 2024-12-23 at 02 52 06](https://github.com/user-attachments/assets/f22a170c-c537-4201-abea-f452a7faf654)
+
+
+## Project Struct
+ure
 ```plaintext
 .
 ├── backend/            # Spring Boot application
@@ -79,7 +85,7 @@ cd llama-chatbot
 docker-compose up --build
 ```
 ### Option 2: Running the .jar File Directly
-* If you prefer not to use Docker, you can run the application directly by executing the .jar file:
+If you prefer not to use Docker, you can run the application directly by executing the .jar file:
 
 ```bash
 java -jar llama2-1.jar
